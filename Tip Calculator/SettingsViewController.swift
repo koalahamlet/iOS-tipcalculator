@@ -10,9 +10,12 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
+    @IBOutlet weak var tipSettingsControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        var defaults = NSUserDefaults.standardUserDefaults()
+        tipSettingsControl.selectedSegmentIndex = defaults.integerForKey("selectedSegment")
 
         // Do any additional setup after loading the view.
     }
@@ -23,6 +26,13 @@ class SettingsViewController: UIViewController {
     }
     
 
+    @IBAction func onValueChanged(sender: AnyObject) {
+        var defaults = NSUserDefaults.standardUserDefaults()
+
+        var selectedSegment = tipSettingsControl.selectedSegmentIndex
+        defaults.setInteger(selectedSegment, forKey: "selectedSegment")
+        defaults.synchronize()
+    }
     /*
     // MARK: - Navigation
 
